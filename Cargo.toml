@@ -13,11 +13,8 @@ publish = false
 name = "guessing_game"
 path = "src/guess.rs"
 
-[[bin]]
-name = "autoguess"
-path = "src/auto.rs"
 
 [dependencies]
-rand = "0.5"
-colored = "1.6"
-meval = "0.1"
+rand = "0.8.5"
+colored = "2.0.0"
+meval = "0.2.0"

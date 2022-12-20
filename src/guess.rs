@@ -1,56 +1,67 @@
 extern crate rand;
 extern crate colored;
 
-use std::io::*;
-use std::cmp::Ordering;
+use std::io;
 use rand::Rng;
 use colored::*;
 
-static GREETING: &str = "=> Guess the number!";
-static FIRST_PROMPT: &str = "Please input your guess:";
-static PROMPT: &str = "New guess?";
-static TOO_LOW: &str = "Too small!";
-static TOO_HIGH: &str = "Too big!";
+static GREETING: &str = "High or Low!";
+static FAREWELL: &str = "Thank you for playing!";
 static WIN: &str = "Congratulations! You won!";
+static LOSE: &str = "Sorry! You lose!";
+static HIGHER: &str= "Higher";
+static LOWER: &str= "Lower";
 
 fn main() {
     println!("{}", GREETING.yellow().bold().italic());
 
-    let secret_number = rand::thread_rng().gen_range(1, 101); // .gen_range is from Rng.
-    let mut is_first_run: bool = true;
-    let mut attempts: u64 = 0;
+    let first_number = rand::thread_rng().gen_range(1..101); // .gen_range is from Rng.
+    let secret_number = rand::thread_rng().gen_range(1..101); // .gen_range is from Rng.
 
-    loop {
-        attempts = attempts+1;
+    intro();
 
-        let mut guess = String::new();
+    println!("First Number is: {}", first_number);
+    println!("Second Card is Hidden");
 
-        if is_first_run == true {
-            is_first_run = false;
-            print!("   {} ", FIRST_PROMPT.bold());
+    println!("Is the second card {} or {} than the first? ", HIGHER.cyan().italic(), LOWER.cyan().italic());
+
+    let mut guess = String::new();
+    io::stdin().read_line(&mut guess).unwrap();
+
+    println!("Second card was: {}", secret_number);
+
+    compare(first_number, secret_number, guess);
+
+    println!("{}", FAREWELL.yellow().bold().italic());
+
+}
+
+fn intro() {
+    println!("Welcome to my Rust Final Project! by Ben Gelfand");
+    println!("The game is simple: the program will generate two random numbers. One will be revealed and one will be kept secret.");
+    println!("The program will then ask the user if they think the secret card is higher or lower than the first card");
+    println!("Depending on what the user answers and the otucome, the program will display you win or you lose. \n");
+}
+
+fn compare(first_number:i32, second_number:i32, guess: String) {
+
+    if second_number > first_number {
+        println!("Second card was {}", HIGHER.cyan().bold());
+
+        if guess.contains("High") || guess.contains("high") {
+            println!("{}", WIN.green().bold());
+        } else  if guess.contains("Low") || guess.contains("low") {
+            println!("{}", LOSE.red().bold());
         }
+    } else  if second_number < first_number {
+        println!("Second card was {}", LOWER.cyan().bold());
 
-        stdout().flush()
-            .expect("Failed to flush stdout");
-        stdin().read_line(&mut guess)
-            .expect("Failed to read line :(");
-
-        // Sanitize input
-        let guess: u32 = match guess.trim().parse() {
-            Ok(num) => num,
-            Err(_) => { // _ means "any kind of value" (like *)
-                print!("{}", "⨯  Please enter a valid number: ".red().bold());
-                continue; // next round of loop
-            }
-        };
-
-        match guess.cmp(&secret_number) {
-            Ordering::Less => print!("{}  {} {} ", "▲".yellow().bold(), TOO_LOW.yellow().bold(), PROMPT.bold()),
-            Ordering::Greater => print!("{}  {} {} ", "▼".cyan().bold(), TOO_HIGH.cyan().bold(), PROMPT.bold()),
-            Ordering::Equal => {
-                println!("{}  {} ({} attempts)", "✓".green().bold(), WIN.green().bold(), attempts.to_string().yellow().bold());
-                break; // Break loop
-            }
+        if guess.contains("High") || guess.contains("high") {
+            println!("{}", LOSE.red().bold());
+        } else  if guess.contains("Low") || guess.contains("low") {
+            println!("{}", WIN.green().bold());
         }
     }
+
 }
+
