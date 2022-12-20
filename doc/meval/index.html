@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="This Rust crate provides a simple math expression parsing and evaluation. Its main goal is to be convenient to use, while allowing for some flexibility. Currently works only with `f64` types. A typical use case is the configuration of numerical computations in Rust, think initial data and boundary conditions, via config files or command line arguments."><meta name="keywords" content="rust, rustlang, rust-lang, meval"><title>meval - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../dark.css" disabled><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../storage.js"></script><script defer src="../crates.js"></script><script defer src="../main.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../favicon.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../meval/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../meval/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Crate meval</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 0.2.0</li><li><a id="all-types" href="all.html">All Items</a></li></ul></div><section><div class="block"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../meval/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">meval</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/meval/lib.rs.html#1-274">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>This <a href="https://www.rust-lang.org/">Rust</a> crate provides a simple math expression parsing and evaluation. Its main goal is to
+be convenient to use, while allowing for some flexibility. Currently works only with <code>f64</code>
+types. A typical use case is the configuration of numerical computations in
+Rust, think initial data and boundary conditions, via config files or command line arguments.</p>
+<h2 id="documentation"><a href="#documentation">Documentation</a></h2>
+<ul>
+<li><a href="https://docs.rs/meval">Full API documentation</a></li>
+</ul>
+<h2 id="installation"><a href="#installation">Installation</a></h2>
+<p>Simply add the corresponding entry to your <code>Cargo.toml</code> dependency list:</p>
+<div class="example-wrap"><pre class="language-toml"><code>[dependencies]
+meval = &quot;0.2&quot;</code></pre></div>
+<p>and add this to your crate root:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">meval</span>;</code></pre></div>
+<p><strong>Requires Rust 1.26.</strong></p>
+<h2 id="simple-examples"><a href="#simple-examples">Simple examples</a></h2>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">meval</span>;
+
+<span class="kw">fn</span> <span class="ident">main</span>() {
+    <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">meval::eval_str</span>(<span class="string">&quot;1 + 2&quot;</span>).<span class="ident">unwrap</span>();
+
+    <span class="macro">println!</span>(<span class="string">&quot;1 + 2 = {}&quot;</span>, <span class="ident">r</span>);
+}</code></pre></div>
+<p>Need to define a Rust function from an expression? No problem, use <a href="struct.Expr.html"><code>Expr</code></a>
+for this and more:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">meval</span>;
+
+<span class="kw">fn</span> <span class="ident">main</span>() {
+    <span class="kw">let</span> <span class="ident">expr</span>: <span class="ident">meval::Expr</span> <span class="op">=</span> <span class="string">&quot;sin(pi * x)&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>();
+    <span class="kw">let</span> <span class="ident">func</span> <span class="op">=</span> <span class="ident">expr</span>.<span class="ident">bind</span>(<span class="string">&quot;x&quot;</span>).<span class="ident">unwrap</span>();
+
+    <span class="kw">let</span> <span class="ident">vs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> (<span class="number">0</span>..<span class="number">100</span><span class="op">+</span><span class="number">1</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> <span class="ident">func</span>(<span class="ident">i</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">/</span> <span class="number">100.</span>)).<span class="ident">collect</span>();
+
+    <span class="macro">println!</span>(<span class="string">&quot;sin(pi * x), 0 &lt;= x &lt;= 1: {:?}&quot;</span>, <span class="ident">vs</span>);
+}</code></pre></div>
+<p>Custom constants and functions? Define a <a href="struct.Context.html"><code>Context</code></a>!</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">meval</span>::{<span class="ident">Expr</span>, <span class="ident">Context</span>};
+
+<span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="number">1.</span>;
+<span class="kw">let</span> <span class="ident">expr</span>: <span class="ident">Expr</span> <span class="op">=</span> <span class="string">&quot;phi(-2 * zeta + x)&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>();
+
+<span class="comment">// create a context with function definitions and variables</span>
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ctx</span> <span class="op">=</span> <span class="ident">Context::new</span>(); <span class="comment">// built-ins</span>
+<span class="ident">ctx</span>.<span class="ident">func</span>(<span class="string">&quot;phi&quot;</span>, <span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>)
+   .<span class="ident">var</span>(<span class="string">&quot;zeta&quot;</span>, <span class="op">-</span><span class="number">1.</span>);
+<span class="comment">// bind function with a custom context</span>
+<span class="kw">let</span> <span class="ident">func</span> <span class="op">=</span> <span class="ident">expr</span>.<span class="ident">bind_with_context</span>(<span class="ident">ctx</span>, <span class="string">&quot;x&quot;</span>).<span class="ident">unwrap</span>();
+<span class="macro">assert_eq!</span>(<span class="ident">func</span>(<span class="number">2.</span>), <span class="op">-</span><span class="number">2.</span> <span class="op">*</span> <span class="op">-</span><span class="number">1.</span> <span class="op">+</span> <span class="number">2.</span> <span class="op">+</span> <span class="number">1.</span>);</code></pre></div>
+<p>For functions of 2, 3, and N variables use <code>Context::func2</code>, <code>Context::func3</code> and
+<code>Context::funcn</code>,
+respectively. See <a href="struct.Context.html"><code>Context</code></a> for more options.</p>
+<p>If you need a custom function depending on mutable parameters, you will need to use a
+<a href="https://doc.rust-lang.org/stable/std/cell/struct.Cell.html"><code>Cell</code></a>:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">std::cell::Cell</span>;
+<span class="kw">use</span> <span class="ident">meval</span>::{<span class="ident">Expr</span>, <span class="ident">Context</span>};
+<span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">Cell::new</span>(<span class="number">0.</span>);
+<span class="kw">let</span> <span class="ident">expr</span>: <span class="ident">Expr</span> <span class="op">=</span> <span class="string">&quot;phi(x)&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>();
+
+<span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ctx</span> <span class="op">=</span> <span class="ident">Context::empty</span>(); <span class="comment">// no built-ins</span>
+<span class="ident">ctx</span>.<span class="ident">func</span>(<span class="string">&quot;phi&quot;</span>, <span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>.<span class="ident">get</span>());
+
+<span class="kw">let</span> <span class="ident">func</span> <span class="op">=</span> <span class="ident">expr</span>.<span class="ident">bind_with_context</span>(<span class="ident">ctx</span>, <span class="string">&quot;x&quot;</span>).<span class="ident">unwrap</span>();
+<span class="macro">assert_eq!</span>(<span class="ident">func</span>(<span class="number">2.</span>), <span class="number">2.</span>);
+<span class="ident">y</span>.<span class="ident">set</span>(<span class="number">3.</span>);
+<span class="macro">assert_eq!</span>(<span class="ident">func</span>(<span class="number">2.</span>), <span class="number">5.</span>);</code></pre></div>
+<h2 id="supported-expressions"><a href="#supported-expressions">Supported expressions</a></h2>
+<p><code>meval</code> supports basic mathematical operations on floating point numbers:</p>
+<ul>
+<li>binary operators: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code> (remainder), <code>^</code> (power)</li>
+<li>unary operators: <code>+</code>, <code>-</code></li>
+</ul>
+<p>It supports custom variables and functions like <code>x</code>, <code>weight</code>, <code>C_0</code>, <code>f(1)</code>, etc. A variable
+or function name must start with <code>[a-zA-Z_]</code> and can contain only <code>[a-zA-Z0-9_]</code>. Custom
+functions with a variable number of arguments are also supported.</p>
+<p>Build-ins (given by the context <code>Context::new()</code> and when no context provided) currently
+supported:</p>
+<ul>
+<li>
+<p>functions implemented using functions of the same name in <a href="http://doc.rust-lang.org/stable/std/primitive.f64.html">Rust std library</a>:</p>
+<ul>
+<li><code>sqrt</code>, <code>abs</code></li>
+<li><code>exp</code>, <code>ln</code></li>
+<li><code>sin</code>, <code>cos</code>, <code>tan</code>, <code>asin</code>, <code>acos</code>, <code>atan</code>, <code>atan2</code></li>
+<li><code>sinh</code>, <code>cosh</code>, <code>tanh</code>, <code>asinh</code>, <code>acosh</code>, <code>atanh</code></li>
+<li><code>floor</code>, <code>ceil</code>, <code>round</code></li>
+<li><code>signum</code></li>
+</ul>
+</li>
+<li>
+<p>other functions:</p>
+<ul>
+<li><code>max(x, ...)</code>, <code>min(x, ...)</code>: maximum and minimumum of 1 or more numbers</li>
+</ul>
+</li>
+<li>
+<p>constants:</p>
+<ul>
+<li><code>pi</code></li>
+<li><code>e</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="deserialization"><a href="#deserialization">Deserialization</a></h2>
+<p><a href="struct.Expr.html"><code>Expr</code></a> supports deserialization using the <a href="https://crates.io/crates/serde">serde</a> library to make flexible
+configuration easy to set up, if the feature <code>serde</code> is enabled (disable by default).</p>
+
+<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">serde_derive</span>;
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">toml</span>;
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">meval</span>;
+<span class="kw">use</span> <span class="ident">meval</span>::{<span class="ident">Expr</span>, <span class="ident">Context</span>};
+
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Deserialize</span>)]</span>
+<span class="kw">struct</span> <span class="ident">Ode</span> {
+   <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">deserialize_with</span> <span class="op">=</span> <span class="string">&quot;meval::de::as_f64&quot;</span>)]</span>
+   <span class="ident">x0</span>: <span class="ident">f64</span>,
+   <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">deserialize_with</span> <span class="op">=</span> <span class="string">&quot;meval::de::as_f64&quot;</span>)]</span>
+   <span class="ident">t0</span>: <span class="ident">f64</span>,
+   <span class="ident">f</span>: <span class="ident">Expr</span>,
+   <span class="ident">g</span>: <span class="ident">Expr</span>,
+}
+
+<span class="kw">fn</span> <span class="ident">main</span>() {
+   <span class="kw">let</span> <span class="ident">config</span> <span class="op">=</span> <span class="string">r#&quot;
+       x0 = &quot;cos(1.)&quot;
+       t0 = 2
+       f = &quot;sin(x)&quot;
+       g = 2.5
+   &quot;#</span>;
+   <span class="kw">let</span> <span class="ident">ode</span>: <span class="ident">Ode</span> <span class="op">=</span> <span class="ident">toml::from_str</span>(<span class="ident">config</span>).<span class="ident">unwrap</span>();
+
+   <span class="macro">assert_eq!</span>(<span class="ident">ode</span>.<span class="ident">x0</span>, <span class="number">1f64</span>.<span class="ident">cos</span>());
+   <span class="macro">assert_eq!</span>(<span class="ident">ode</span>.<span class="ident">t0</span>, <span class="number">2f64</span>);
+   <span class="macro">assert_eq!</span>(<span class="ident">ode</span>.<span class="ident">f</span>.<span class="ident">bind</span>(<span class="string">&quot;x&quot;</span>).<span class="ident">unwrap</span>()(<span class="number">2.</span>), <span class="number">2f64</span>.<span class="ident">sin</span>());
+   <span class="macro">assert_eq!</span>(<span class="ident">ode</span>.<span class="ident">g</span>.<span class="ident">eval</span>().<span class="ident">unwrap</span>(), <span class="number">2.5f64</span>);
+}
+</code></pre></div>
+<h2 id="related-projects"><a href="#related-projects">Related projects</a></h2>
+<p>This is a toy project of mine for learning Rust, and to be hopefully useful when writing
+command line scripts. There is no plan to make this anything more than <em>math expression -&gt;
+number</em> “converter”. For more advanced scripting, see:</p>
+<ul>
+<li><a href="https://crates.io/crates/dyon">dyon</a> – A rusty dynamically typed scripting language</li>
+<li><a href="https://crates.io/crates/gluon">gluon</a> – A static, type inferred programming language for application embedding</li>
+<li><a href="https://github.com/rodolf0/tox">rodolf0/tox</a> – another shunting yard expression parser</li>
+</ul>
+</div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left import-item" id="reexport.RPNError"><code>pub use shunting_yard::<a class="enum" href="shunting_yard/enum.RPNError.html" title="enum meval::shunting_yard::RPNError">RPNError</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item" id="reexport.ParseError"><code>pub use tokenizer::<a class="enum" href="tokenizer/enum.ParseError.html" title="enum meval::tokenizer::ParseError">ParseError</a>;</code></div><div class="item-right docblock-short"></div></div></div><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="shunting_yard/index.html" title="meval::shunting_yard mod">shunting_yard</a></div><div class="item-right docblock-short"><p>Implementation of the shunting-yard algorithm for converting an infix expression to an
+expression in reverse Polish notation (RPN).</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="tokenizer/index.html" title="meval::tokenizer mod">tokenizer</a></div><div class="item-right docblock-short"><p>Tokenizer that converts a mathematical expression in a string form into a series of <code>Token</code>s.</p>
+</div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Context.html" title="meval::Context struct">Context</a></div><div class="item-right docblock-short"><p>A structure for storing variables/constants and functions to be used in an expression.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Expr.html" title="meval::Expr struct">Expr</a></div><div class="item-right docblock-short"><p>Representation of a parsed expression.</p>
+</div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Error.html" title="meval::Error enum">Error</a></div><div class="item-right docblock-short"><p>An error produced during parsing or evaluation.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.FuncEvalError.html" title="meval::FuncEvalError enum">FuncEvalError</a></div><div class="item-right docblock-short"><p>Function evaluation error.</p>
+</div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ArgGuard.html" title="meval::ArgGuard trait">ArgGuard</a></div><div class="item-right docblock-short"><p>Trait for types that can specify the number of required arguments for a function with a
+variable number of arguments.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ContextProvider.html" title="meval::ContextProvider trait">ContextProvider</a></div><div class="item-right docblock-short"><p>A trait of a source of variables (and constants) and functions for substitution into an
+evaluated expression.</p>
+</div></div></div><h2 id="functions" class="small-section-header"><a href="#functions">Functions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.eval_str.html" title="meval::eval_str fn">eval_str</a></div><div class="item-right docblock-short"><p>Evaluates a string with built-in constants and functions.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.eval_str_with_context.html" title="meval::eval_str_with_context fn">eval_str_with_context</a></div><div class="item-right docblock-short"><p>Evaluates a string with the given context.</p>
+</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="meval" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

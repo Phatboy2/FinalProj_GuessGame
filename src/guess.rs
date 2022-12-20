@@ -12,8 +12,9 @@ static LOSE: &str = "Sorry! You lose!";
 static HIGHER: &str= "Higher";
 static LOWER: &str= "Lower";
 
+///Code is designed to show the user one card and ask if the next card will be higher or lower than the first, then congratulatecls or forgive the user
 fn main() {
-    println!("{}", GREETING.yellow().bold().italic());
+    println!("{} \n", GREETING.yellow().bold().italic());
 
     let first_number = rand::thread_rng().gen_range(1..101); // .gen_range is from Rng.
     let secret_number = rand::thread_rng().gen_range(1..101); // .gen_range is from Rng.

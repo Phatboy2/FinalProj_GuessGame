@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["compare",""],["intro",""],["main","Code is designed to show the user one card and ask if the next card will be higher or lower than the first, then congratulate or forgive the user"]],"static":[["FAREWELL",""],["GREETING",""],["HIGHER",""],["LOSE",""],["LOWER",""],["WIN",""]]};
